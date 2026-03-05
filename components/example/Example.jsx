@@ -22,10 +22,11 @@ class Example extends React.Component {
     // We can initialize it here.
     // We read the example model data into the state variable 'name'
     this.state = {
-      name: window.models.exampleModel().name,
-      counter: 0,
-      inputValue: '',
-      buttonWasClicked: '',
+        name: window.models.exampleModel().name,
+        motto: window.models.exampleModel().motto,
+        counter: 0,
+        inputValue: '',
+        buttonWasClicked: '',
     };
 
     // React events are called directly from DOM event handlers
@@ -33,6 +34,7 @@ class Example extends React.Component {
     // generate new functions that handle the event by just calling
     // the method that handles the event.
     this.handleChangeBound = event => this.handleChange(event);
+    this.handleMottoChangeBound = event => this.handleMottoChange(event);
     // Note: A commmon idiom in React code is to use JavaScript bind() to
     // smash the method to accomplish this passthrough to the method:
     //      this.handleChange = this.handleChange.bind(this);
@@ -66,9 +68,12 @@ class Example extends React.Component {
 
   // Method called when the input box is typed into.
   handleChange(event) {
-    this.setState({ inputValue: event.target.value });
+      this.setState({ inputValue: event.target.value });
   }
 
+  handleMottoChange(event) {
+      this.setState({ motto: event.target.value });
+  }
   // Method called when the button is pushed
   /* eslint-disable-next-line no-unused-vars */
   handleButtonClick(buttonName, event) {
@@ -104,6 +109,14 @@ class Example extends React.Component {
 
         <div className="motto-update">
           {/* Your problem #1 motto displaying and updating widget goes here */}
+            {this.state.name}
+            <br/>
+            {this.state.motto}
+            <hr></hr>
+        </div>
+        <div>
+            <label htmlFor="mottoId">Change Motto: </label>
+            <input id="mottoId" type="text" value={this.state.motto} onChange={this.handleMottoChangeBound} />
         </div>
 
         <p>
@@ -403,5 +416,4 @@ class Example extends React.Component {
     );
   }
 }
-
 export default Example;
